@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  generation: 2
+  labels:
+    run: instabot
+  name: instabot-yournamehere
+  namespace: instagram-yournamehere
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: instabot
+    spec:
+      containers:
+      - name: instabot
+        image: hellbentv/instabot.py-docker:latest
+        imagePullPolicy: Always
+        env:
+        - name: USERNAME
+          value: yourusernamehere
+        - name: PASSWORD
+          value: 'yourpasswordhere'
+        - name: HASHTAGS
+          value: "your space separated hashtags here"
+        stdin: true
+        tty: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
